@@ -8,22 +8,6 @@ URL = 'https://www.amazon.de/gp/product/B0744D858V?pf_rd_p=671e72bc-8864-4ab6-8e
 headers = {"User-Agent": 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:67.0) Gecko/20100101 Firefox/67.0'}
 
 
-def send_mail():
-    server = smtplib.SMTP('smtp.gmail.com', port=587)
-    server.ehlo()
-    server.starttls()
-    server.ehlo()
-
-    server.login('johklunk@gmail.com', 'lxivyrlwqxamazgl')
-
-    subject='Price fall down!' 
-    body = 'Check the amazon link:' + URL
-
-    msg = f"Subject: {subject}\n\n{body}"
-
-    server.sendmail('johklunk@gmail.com', 'wSmo7RLZo5@web.de', msg)
-    print('Email has send')
-    server.quit()
 
 def check_price():
     page = requests.get(URL, headers=headers)
@@ -39,7 +23,7 @@ def check_price():
     print('price for Portmonee was checked: ', converted_price)  
 
     if converted_price < wished_price:
-        send_mail()
+        print('true')
 
 while True:
     check_price()
