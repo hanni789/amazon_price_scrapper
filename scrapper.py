@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from re import sub
+import schedule
 import time
 import webbrowser as wb
 
@@ -9,8 +10,9 @@ headers = {"User-Agent": 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:67.0) Gecko
 
 
 def open_page():
-    firefox = wb.get('firefox')
-    firefox.open_new_tab(URL)
+    print('test')
+    # firefox = wb.get('firefox')
+    # firefox.open_new_tab(URL)
 
 
 def check_price():
@@ -30,6 +32,9 @@ def check_price():
         open_page()
         
 
+schedule.every().minute.do(check_price)
+
 while True:
-    check_price()
-    time.sleep(60 * 60)
+    schedule.run_pending()
+    # check_price()
+    time.sleep(1)
